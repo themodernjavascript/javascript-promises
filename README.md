@@ -1,6 +1,6 @@
 # promises
 
-1. Introduction: callbacks
+1. Callbacks
 2. Promise
 3. Promises chaining
 4. Promise API
