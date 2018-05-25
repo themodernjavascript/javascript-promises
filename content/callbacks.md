@@ -1,4 +1,4 @@
-# Introduction Callbacks
+## Introduction Callbacks
 
 Many actions in JavaScript are asynchronous.
 
@@ -87,3 +87,35 @@ loadScript('https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.2.0/lodash.js', s
 That's called a "callback-based" style of asynchronous programming. A function that does something asynchronously should provide a callback argument where we put the function to run after it’s complete.
 
 Here we did it in `loadScript`, but it's a general approach.
+
+# Callback in callback
+
+How to load two scripts sequentially, the first one, and then the second one after it?
+
+The natural solution would be to put the second `loadScript` call inside the callback, like this:
+
+```javascript
+loadScript('my-script.js', function(script) {
+  alert(`Cool, the ${script.src} is loaded, let's load one more`);
+
+  loadScript('my-script2.js', function(script) {
+    alert(`Cool, the second script is loaded`);
+  });
+});
+```
+
+After the outer `loadScript` is complete, the callback initiates the inner one.
+
+What if we want one more script...?
+
+```javascript
+loadScript('/my/script.js', function(script) {
+  loadScript('/my/script2.js', function(script) {
+    loadScript('/my/script3.js', function(script) {
+      // ...continue after all scripts are loaded
+    });
+  })
+});
+```
+
+So, every new action is inside a callback. That's fine for few actions, but not good for many, so we'll see other variants soon.
