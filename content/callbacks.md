@@ -2,7 +2,7 @@
 
 ## Introduction Callbacks
 
-Many actions in JavaScript are asynchronous.
+Many actions in JavaScript are asynchronous. ([what's asynchronous?](https://rowanmanning.com/posts/javascript-for-beginners-async))
 
 For instance, take a look at the function `loadScript(src)`:
 
