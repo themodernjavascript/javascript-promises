@@ -90,7 +90,7 @@ That's called a "callback-based" style of asynchronous programming. A function t
 
 Here we did it in `loadScript`, but it's a general approach.
 
-## Callback in callback
+## Callback in Callback
 
 How to load two scripts sequentially, the first one, and then the second one after it?
 
@@ -121,3 +121,44 @@ loadScript('/my/script.js', function(script) {
 ```
 
 So, every new action is inside a callback. That's fine for few actions, but not good for many, so we'll see other variants soon.
+
+## Handling Errors
+
+In examples above we didn't consider errors. What if the script loading fails? Our callback should be able to react on that.
+
+Here's an improved version of `loadScript` that tracks loading errors:
+
+```javascript
+function loadScript(src, callback) {
+  let script = document.createElement('script');
+  script.src = src;
+
+  script.onload = () => callback(null, script);
+  script.onerror = () => callback(new Error(`Script load error for ${src}`));
+
+  document.head.append(script);
+}
+```
+
+It calls `callback(null, script)` for successful load and `callback(error)` otherwise.
+
+The usage:
+
+```javascript
+loadScript('my-script.js', function(error, script) {
+  if (error) {
+    // handle error
+  } else {
+    // script loaded successfully
+  }
+});
+```
+
+Once again, the recipe that we used for `loadScript` is actually quite common. It's called the "error-first callback" style.
+
+The convention is:
+
+1. The first argument of `callback` is reserved for an error if it occurs. Then `callback(err)` is called.
+2. The second argument (and the next ones if needed) are for the successful result. Then `callback(null, result1, result2...)` is called.
+
+So the single `callback` function is used both for reporting errors and passing back results.
