@@ -1,3 +1,5 @@
+# Callbacks
+
 ## Introduction Callbacks
 
 Many actions in JavaScript are asynchronous.
@@ -88,7 +90,7 @@ That's called a "callback-based" style of asynchronous programming. A function t
 
 Here we did it in `loadScript`, but it's a general approach.
 
-# Callback in callback
+## Callback in callback
 
 How to load two scripts sequentially, the first one, and then the second one after it?
 
