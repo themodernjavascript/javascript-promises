@@ -38,4 +38,4 @@ When the executor finishes the job, it should call one of:
   * sets `state` to `"rejected"`,
   * sets `result` to `error`.
 
-
+![promise resolve reject](/assets/images/promise-resolve-reject.png)
