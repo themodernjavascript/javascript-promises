@@ -39,3 +39,44 @@ When the executor finishes the job, it should call one of:
   * sets `result` to `error`.
 
 ![promise resolve reject](/assets/images/promise-resolve-reject.png)
+
+Here’s a simple executor, to gather that all together:
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+  // the function is executed automatically when the promise is constructed
+
+  alert(resolve); // function () { [native code] }
+  alert(reject);  // function () { [native code] }
+
+  // after 1 second signal that the job is done with the result "done!"
+  setTimeout(() => resolve("done!"), 1000);
+});
+```
+
+We can see two things by running the code above:
+
+1. The executor is called automatically and immediately (by `new Promise`).
+2. The executor receives two arguments: `resolve` and `reject` – these functions come from JavaScript engine. We don’t need to create them. Instead the executor should call them when ready.
+
+After one second of thinking the executor calls `resolve("done")` to produce the result:
+
+![promise resolve](/assets/images/promise-resolve-1.png)
+
+That was an example of the "successful job completion".
+
+And now an example where the executor rejects promise with an error:
+
+```javascript
+let promise = new Promise(function(resolve, reject) {
+  // after 1 second signal that the job is finished with an error
+  setTimeout(() => reject(new Error("Whoops!")), 1000);
+});
+```
+
+![promise reject](/assets/images/promise-reject-1.png)
+
+To summarize, the executor should do a job (something that takes time usually) and then call `resolve` or `reject` to change the state of the corresponding promise object.
+
+The promise that is either resolved or rejected is called "settled", as opposed to a "pending" promise.
+
