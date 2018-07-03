@@ -8,4 +8,4 @@
 06. [Promise](/content/06-promise.md)
 07. [Awaiting a promise](/content/07-awaiting-a-promise.md)
 08. [Promise chaining](/content/08-promise-chaining.md)
-09. [Syn/Asyn](/content/09-.md)
+09. [Promise is asynchronous](/content/09-promise-is-asynchronous.md)
