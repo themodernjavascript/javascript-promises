@@ -55,3 +55,28 @@ var askMom = function() {
     });
 };
 ```
+
+So far so good, let's return to the problem mentioned in the preview chapter: [callbacks](/content/05-callback-hell.md).
+
+For an example, loading scripts. let’s use this feature with loadExternalScript to load scripts one by one, in sequence:
+
+```javascript
+loadExternalScript("script.js")
+  .then(function(script) {
+    return loadExternalScript("script2.js");
+  })
+  .then(function(script) {
+    return loadExternalScript("script3.js");
+  })
+  .then(function(script) {
+    // Use functions declared in scripts
+    // to show that they indeed loaded
+    one();
+    two();
+    three();
+  });
+```
+
+Here each `loadExternalScript` call returns a promise, and the next `.then` runs when it resolves. Then it initiates the loading of the next script. So scripts are loaded one after another.
+
+We can add more asynchronous actions to the chain. Please note that code is still "flat", it grows down, not to the right. There are no signs of "Callback Hell".
