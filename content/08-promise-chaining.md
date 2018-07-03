@@ -5,7 +5,7 @@ excerpt: "..."
 last_modified_at: 2018-07-02T15:58:49-04:00
 ---
 
-Promises are chainable.
+> Promises are chainable.
 
 Let's say, you are the kid, and you promise your friend that you will show them the new phone when your mom buy you one.
 
@@ -45,13 +45,13 @@ Let's chain the promises. You are the kid can only start the `showOff` promise a
 // call our promise
 var askMom = function() {
   willIGetNewPhone
-    .then(showOff) // chain goes here
+    .then(showOff) // Chain goes here
     .then(function(result) {
-      console.log(fulfilled); // output: 'Hey friend, I have a new black Samsung phone.'
+      console.log(fulfilled); // Output: 'Hey friend, I have a new black Samsung phone.'
     })
     .catch(function(error) {
-      // oops, mom don't buy it
-      console.log(error.message); // output: 'mom is not happy'
+      // Oops, mom don't buy it
+      console.log(error.message); // Output: 'mom is not happy'
     });
 };
 ```
