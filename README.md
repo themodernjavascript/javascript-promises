@@ -7,3 +7,4 @@
 5. [Callback Hell](/content/05-callback-hell.md)
 6. [Promise](/content/06-promise.md)
 7. [Awaiting a promise](/content/07-awaiting-a-promise.md)
+8. [Promise chaining](/content/08-promise-chaining.md)
