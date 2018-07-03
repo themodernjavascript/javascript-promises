@@ -46,7 +46,7 @@ A promise result can be in one of the 3 result below:
 
 ## Example
 
-Here is an example of the `factory function` resolving the promise with a successful job completion or rejecting the promise with an error:
+Here is an example of the `factory function` either resolving the promise with a successful job completion or rejecting the promise with an error:
 
 ```javascript
 let isMomHappy = true;
