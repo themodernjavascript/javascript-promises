@@ -5,7 +5,7 @@ excerpt: "..."
 last_modified_at: 2018-07-02T15:58:49-04:00
 ---
 
-> Promises are chainable.
+> Promise is chainable.
 
 Let's say, you are the kid, and you promise your friend that you will show them the new phone when your mom buy you one.
 
