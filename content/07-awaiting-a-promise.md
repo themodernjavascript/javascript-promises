@@ -5,7 +5,7 @@ excerpt: "In order to use a promise, we must wait for it to be resolve/fulfilled
 last_modified_at: 2018-06-27T15:58:49-04:00
 ---
 
-In order to use a promise, we must wait for it to be resolve/fulfilled or rejected. The way to do this is using `promise.then` and `promise.catch`
+In order to use a promise, we must wait for it to be resolve or rejected. The way to do this is using `promise.then` and `promise.catch`
 
 If a promise is pending, `promise.then/catch` handlers wait for the result. Otherwise, if a promise has already settled, they execute immediately.
 
@@ -23,54 +23,43 @@ promise.then(
 1. The first argument of `promise.then` is a function that runs when the Promise is resolved, and receives the result.
 2. The second argument of .then is a function that runs when the Promise is rejected, and receives the error.
 
-Here is an example of the resolving the promise with a successful job completion:
+Here is an example of either resolving the promise with a successful job completion or rejecting the promise with an error:
 
 ```javascript
-let promise = new Promise(function(resolve, reject) {
-  setTimeout(() => resolve("done"), 1000);
+let isMomHappy = true;
+
+let willIGetNewPhone = new Promise(function (resolve, reject) {
+  if (isMomHappy) {
+    let phone = {
+      brand: 'Samsung',
+      color: 'black'
+    };
+    
+    setTimeout(() => resolve(phone), 1000); // fulfilled
+  } else {
+    let reason = new Error('mom is not happy');
+    setTimeout(() => reject(reason), 1000); // reject
+  }
 });
 
-// resolve runs the first function in .then
-promise.then(
-  result => alert(result), // shows "done" after 1 second
-  error => alert(error) // doesn't run
-);
+// call our promise
+var askMom = function () {
+  willIGetNewPhone.then(function (result) {
+    // Yeah, you got a new phone
+    console.log(result); // output: { brand: 'Samsung', color: 'black' }
+  }).catch(function (error) {
+    // Oops, mom don't buy it
+    console.log(error.message); // output: 'mom is not happy'
+  });
+};
+
+askMom();
 ```
 
-And here is an example of the rejecting the promise with an error:
-
-```javascript
-let promise = new Promise(function(resolve, reject) {
-  setTimeout(() => reject(new Error("error")), 1000);
-});
-
-// reject runs the second function in .then
-promise.then(
-  result => alert(result), // doesn't run
-  error => alert(error) // shows "Error: error" after 1 second
-);
-```
-
-If you want to execute only in successful completions, then you can provide only one function argument to `promise.then`:
-
-```javascript
-let promise = new Promise(resolve => {
-  setTimeout(() => resolve("done"), 1000);
-});
-
-promise.then(alert); // shows "done!" after 1 second
-```
-
-If you want to execute only in errors, then you can use `null` as the first argument: `promise.then(null, errorHandlingFunction)`. Or you can use `promise.catch(errorHandlingFunction)`, which is exactly the same using:
-
-```javascript
-let promise = new Promise((resolve, reject) => {
-  setTimeout(() => reject(new Error("error")), 1000);
-});
-
-// promise.catch(f) is the same as promise.then(null, f)
-promise.catch(alert); // shows "Error: error" after 1 second
-```
+* We have a function call `askMom`. In this function, we will execute our promise `willIGetNewPhone`.
+We want to take some action once the promise is resolved or rejected, we use `.then` and `.catch` to handle our action.
+* We have function(result) { ... } in `.then`. What is the value of result? The result value is exactly the value you pass in your promise resolve(your_success_value). Therefore, it will be phone in our case.
+* We have function(error){ ... } in `.catch`. What is the value of error? As you can guess, the error value is exactly the value you pass in your promise reject(your_fail_value). Therefore, it will be reason in our case.
 
 Further Reading
 
