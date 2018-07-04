@@ -11,8 +11,8 @@ Async function is enabled by default in all browsers.
 
 Why Async function?
 
-* Async function make your asynchronous code less.
-* Async function make your asynchronous feel to synchronous code and more readable as it were asynchronous.
+* Make your asynchronous code less.
+* Make your asynchronous feel to synchronous code and more readable as it were asynchronous.
 
 The syntax of `async function` is:
 
