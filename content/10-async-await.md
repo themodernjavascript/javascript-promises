@@ -1,7 +1,7 @@
 ---
 title: "Async/await"
 permalink: /the-modern-javascript-tutorial/async-await
-excerpt: "..."
+excerpt: "Async function is enabled by default in all browsers..."
 last_modified_at: 2018-07-04T15:58:49-04:00
 ---
 
@@ -78,4 +78,82 @@ f();
 
 The function execution pauses at the line (6) and resumes when the promise settles, and returns its result. So the code above shows "done" in one second.
 
-Let's take showOff() example from the chapter `promise chaining` and `promise is asynchronous`, rewrite it using async/await.
+## Error handling
+
+If a promise resolves normally, then await promise returns the result. But in case of a rejection it throws the error:
+
+```javascript
+async function f() {
+  await Promise.reject(new Error("Error"));
+}
+```
+
+```javascript
+async function f() {
+  throw new Error("Error");
+}
+```
+
+The promise may take some time before it rejects then throw an error. We can catch that error using `try...catch`:
+
+```javascript
+async function f() {
+  try {
+    let response = await fetch('/no-product');
+    let product = await response.json();
+  } catch(err) {
+    alert(err); // Failed to fetch
+  }
+}
+
+f();
+```
+
+If we don't use `try...catch`, we can append `.catch` to handle it:
+
+```javascript
+async function f() {
+  let response = await fetch('/no-product');
+}
+
+// f() becomes a rejected promise
+f().catch(alert); // Failed to fetch
+``` 
+
+If we forget to add `.catch` there, then we get an unhandled promise error (and can see it in the console).
+
+Let's take the example from the chapter `promise chaining` & `promise is asynchronous` and rewrite it using async/await.
+
+```javascript
+let isMomHappy = true;
+
+let willIGetNewPhone = new Promise(function (resolve, reject) {
+  if (isMomHappy) {
+    let phone = {
+      brand: 'Samsung',
+      color: 'black'
+    };
+    
+    setTimeout(() => resolve(phone), 1000); // fulfilled
+  } else {
+    let reason = new Error('mom is not happy');
+    setTimeout(() => reject(reason), 1000); // reject
+  }
+});
+
+let showOff = function(phone) {
+  let message = 'Hey friend, I have a new ' +
+      phone.color + ' ' + phone.brand + ' phone';
+
+  return Promise.resolve(message);
+};
+
+async function askMom() {
+  let answer = await willIGetNewPhone;
+  console.log(answer);
+  let show = showOff(answer);
+  console.log(show);
+}
+
+askMom();
+```

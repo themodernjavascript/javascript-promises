@@ -1,7 +1,7 @@
 ---
 title: "Promise is Asynchronous"
 permalink: /the-modern-javascript-tutorial/promise-is-asynchronous
-excerpt: "..."
+excerpt: "Promise is asynchronous..."
 last_modified_at: 2018-07-02T15:58:49-04:00
 ---
 

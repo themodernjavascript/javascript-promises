@@ -1,7 +1,7 @@
 ---
 title: "Promise Chaining"
 permalink: /the-modern-javascript-tutorial/promise-chaining
-excerpt: "..."
+excerpt: "Promise is chainable..."
 last_modified_at: 2018-07-02T15:58:49-04:00
 ---
 
