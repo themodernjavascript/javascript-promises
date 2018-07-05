@@ -1,3 +1,5 @@
+![Javascript Promises](/assets/images/cover.jpg)
+
 # Promises
 
 01. [Synchronous and Asynchronous](/content/01-synchronous-and-asynchronous.md)
