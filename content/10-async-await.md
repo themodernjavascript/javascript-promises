@@ -9,10 +9,7 @@ last_modified_at: 2018-07-04T15:58:49-04:00
 
 Async function is enabled by default in all browsers. 
 
-Why Async function?
-
-* Make your asynchronous code less.
-* Make your asynchronous feel to synchronous code and more readable as it were asynchronous.
+Why Async function? Make your asynchronous code less, make your asynchronous feel to synchronous code and more readable as it were asynchronous.
 
 The syntax of `async function` is:
 
@@ -24,7 +21,7 @@ async function name([param[, param[, ... param]]]) {
 
 Async function always returns a promise. If the code has return `<non-promise>` in it, then JavaScript automatically wraps it into a resolved promise with that value.
 
-For an example, the code below returns a resolved promise with the result of 1:
+For an example, the code below returns a resolved promise with the result of `Hi async function!`:
 
 ```javascript
 async function f() {
@@ -68,7 +65,7 @@ async function f() {
     setTimeout(() => resolve("done"), 1000);
   });
 
-  let result = await promise; // Wait till the promise resolves (line: 6)
+  let result = await promise; // wait till the promise resolves (line: 6)
 
   alert(result);
 }
@@ -80,13 +77,15 @@ The function execution pauses at the line (6) and resumes when the promise settl
 
 ## Error handling
 
-If a promise resolves normally, then await promise returns the result. But in case of a rejection it throws the error:
+If a promise resolves normally, then await promise returns the result. Else in case of a rejection it throws the error:
 
 ```javascript
 async function f() {
   await Promise.reject(new Error("Error"));
 }
 ```
+
+Or
 
 ```javascript
 async function f() {
@@ -102,7 +101,7 @@ async function f() {
     let response = await fetch('/no-product');
     let product = await response.json();
   } catch(err) {
-    alert(err); // Failed to fetch
+    alert(err); // failed to fetch
   }
 }
 
@@ -117,12 +116,12 @@ async function f() {
 }
 
 // f() becomes a rejected promise
-f().catch(alert); // Failed to fetch
+f().catch(alert); // failed to fetch
 ``` 
 
 If we forget to add `.catch` there, then we get an unhandled promise error (and can see it in the console).
 
-Let's take the example from the chapter `promise chaining` & `promise is asynchronous` and rewrite it using async/await.
+Let's take the example from the chapter `promise chaining` & `promise is asynchronous` and rewrite it using `async/await` to make it be synchronous:
 
 ```javascript
 let isMomHappy = true;
@@ -149,11 +148,18 @@ let showOff = function(phone) {
 };
 
 async function askMom() {
+  console.log('before asking Mom'); // log before
   let answer = await willIGetNewPhone;
-  console.log(answer);
   let show = showOff(answer);
   console.log(show);
+  console.log('after asking mom'); // log after
 }
 
 askMom();
 ```
+
+The actual output sequence is:
+
+1. before asking Mom
+2. Hey friend, I have a new black Samsung phone.
+3. after asking mom
